@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg-color: #0f0f0f; /* Nero più opaco */
+    --sidebar-bg: rgba(15, 15, 15, 0.95); /* Nero opaco per la sidebar */
+    --accent-color: #ff0000; /* Rosso per i contorni */
+    --accent-hover: #41cc00; /* Rosso più scuro per hover */
+    --text-color: #ffffff;
+    --text-secondary: #a0a0a0;
+    --danger-color: #ff1744;
+    --warning-color: #ffab00;
+    --success-color: #00e676;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: none;
+    background-color: transparent;
+}
+
+#vehicle-details {
+    position: absolute;
+    bottom: 120px; /* Distanza dal fondo */
+    right: 30px; /* Distanza dal bordo destro */
+    background-color: rgba(15, 25, 35, 0.85); /* Sfondo semi-trasparente */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 0, 21, 0.3);
+    max-width: 350px;
+    z-index: 10;
+}
+
+#garage-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: transparent; /* Rendi lo sfondo trasparente */
+}
+
+/* Sidebar styling */
+#sidebar {
+    width: 30%;
+    height: 100%;
+    background-color: var(--sidebar-bg);
+    color: var(--text-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid var(--accent-color);
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.header h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--accent-color);
+}
+
+.search-container {
+    margin-bottom: 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 17, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+.search-box i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box input::placeholder {
+    color: var(--text-secondary);
+}
+
+.vehicle-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.vehicle-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.vehicle-item:hover {
+    background-color: rgba(255, 0, 0, 0.575);
+    transform: translateX(5px);
+}
+
+.vehicle-item.selected {
+    background-color: rgba(255, 0, 0, 0.15);
+    border-left: 3px solid var(--accent-color);
+}
+
+.vehicle-item .vehicle-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.vehicle-item .vehicle-plate {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.vehicle-item .vehicle-badges {
+    display: flex;
+    margin-top: 6px;
+    gap: 5px;
+}
+
+.badge {
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.sequestrato {
+    background-color: var(--danger-color);
+}
+
+.badge.fazione {
+    background-color: var(--warning-color);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.action-btn i {
+    margin-right: 8px;
+}
+
+.action-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.action-btn.close-btn {
+    background-color: var(--danger-color);
+}
+
+.action-btn.close-btn:hover {
+    background-color: #d50000;
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Main area styling */
+#main-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; /* Rendi lo sfondo trasparente */
+}
+
+.vehicle-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.vehicle-header h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.plate-container {
+    display: inline-block;
+    background: linear-gradient(to bottom, #e5e5e5, #c0c0c0);
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 18px;
+    border: 2px solid #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.plate-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    pointer-events: none;
+}
+
+.status-badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.status-badges .badge {
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.vehicle-stats {
+    width: 300px;
+    background-color: rgba(15, 25, 35, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+}
+
+.stat {
+    margin-bottom: 15px;
+}
+
+.stat:last-child {
+    margin-bottom: 0;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.stat-name {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.stat-name i {
+    margin-right: 5px;
+    color: var(--accent-color);
+}
+
+.stat-value {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.stat-bar {
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stat-progress {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.stat-progress.fuel {
+    background-color: var(--accent-color);
+}
+
+.stat-progress.engine {
+    background-color: var(--warning-color);
+}
+
+.stat-progress.body {
+    background-color: var(--success-color);
+}
+
+.navigation {
+    position: absolute;
+    bottom: 50px; /* Distanza dal fondo */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 100;
+}
+
+/* Stile aggiuntivo per i dettagli del veicolo */
+.vehicle-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Utility classes */
+.hidden {
+    display: none;
+}
+
+/* Empty message styling */
+.empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px dashed var(--accent-color);
+}
+
+.empty-message i {
+    font-size: 40px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.empty-message p {
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+
+/* Separatore per le modifiche */
+.stat-separator {
+    margin: 15px 0 10px 0;
+    text-align: center;
+    position: relative;
+}
+
+.stat-separator:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+}
+
+.stat-separator span {
+    position: relative;
+    background-color: rgba(15, 15, 15, 0.7); /* Stesso colore di sfondo del riquadro */
+    padding: 0 10px;
+    font-size: 12px;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* Container per le modifiche */
+.mods-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.mod-item {
+    display: flex;
+    align-items: center;
+    padding: 6px; /* Aumentato da 4px */
+    background-color: rgba(255, 255, 255, 0.1); /* Aumentato contrasto dello sfondo */
+    border-radius: 4px;
+    margin-bottom: 3px; /* Aggiunto spazio tra gli elementi */
+}
+
+.mod-item i {
+    color: var(--accent-color);
+    margin-right: 5px;
+    width: 14px;
+    text-align: center;
+    font-size: 11px;
+}
+
+.mod-item span {
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+.mod-item .mod-value {
+    margin-left: auto;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 10px;
+}
+
+/* Colori per i livelli delle modifiche */
+.mod-level-0 { color: var(--text-secondary); }
+.mod-level-1 { color: #4CAF50; }
+.mod-level-2 { color: #2196F3; }
+.mod-level-3 { color: #9C27B0; }
+.mod-level-4 { color: #FF9800; }
+.mod-level-5 { color: #F44336; }
+
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1400px) {
+    #sidebar {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #sidebar {
+        width: 40%;
+    }
+}

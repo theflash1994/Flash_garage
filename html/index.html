@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="garage-container">
+        <!-- Pannello laterale con informazioni e lista veicoli -->
+        <div id="sidebar">
+            <div class="header">
+                <h1>Garage</h1>
+                <h2 id="garage-name">Centro Città</h2>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Cerca veicolo...">
+                </div>
+            </div>
+            
+            <div class="vehicle-list" id="vehicles-list">
+                <!-- I veicoli verranno inseriti qui dinamicamente -->
+            </div>
+            
+            <div class="actions">
+                <button id="take-vehicle" class="action-btn">
+                    <i class="fas fa-car"></i>
+                    <span>Ritira Veicolo</span>
+                </button>
+                <button id="close-button" class="action-btn close-btn">
+                    <i class="fas fa-times"></i>
+                    <span>Chiudi</span>
+                </button>                
+            </div>
+        </div>
+        
+        <!-- Area principale per visualizzare il veicolo -->
+        <div id="main-area">
+            <!-- Dettagli del veicolo selezionato -->
+            <div id="vehicle-details" class="hidden">
+                <div class="vehicle-header">
+                    <h2 id="vehicle-name">Nome Veicolo</h2>
+                    <div class="plate-container">
+                        <span id="vehicle-plate">ABC123</span>
+                    </div>
+                </div>
+                
+                <div class="status-badges">
+                    <div id="badge-sequestrato" class="badge sequestrato hidden">
+                        <i class="fas fa-lock"></i> Sequestrato
+                    </div>
+                    <div id="badge-fazione" class="badge fazione hidden">
+                        <i class="fas fa-users"></i> Fazione
+                    </div>
+                </div>
+                
+                <div class="vehicle-stats">
+                    <div class="stat">
+                        <div class="stat-header">
+                            <span class="stat-name"><i class="fas fa-gas-pump"></i> Carburante</span>
+                            <span id="fuel-value" class="stat-value">100%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div id="fuel-level" class="stat-progress fuel" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-header">
+                            <span class="stat-name"><i class="fas fa-engine"></i> Motore</span>
+                            <span id="engine-value" class="stat-value">100%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div id="engine-level" class="stat-progress engine" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-header">
+                            <span class="stat-name"><i class="fas fa-car-crash"></i> Carrozzeria</span>
+                            <span id="body-value" class="stat-value">100%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div id="body-level" class="stat-progress body" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Separatore per le modifiche -->
+                    <div class="stat-separator">
+                        <span>Modifiche Fullkit</span>
+                    </div>
+                    
+                    <!-- Modifiche del veicolo -->
+                    <div class="mods-container">
+                        <div class="mod-item" id="mod-engine">
+                            <i class="fas fa-engine"></i>
+                            <span>Motore: </span>
+                            <span class="mod-value">Stock</span>
+                        </div>
+                        <div class="mod-item" id="mod-brakes">
+                            <i class="fas fa-brake-warning"></i>
+                            <span>Freni: </span>
+                            <span class="mod-value">Stock</span>
+                        </div>
+                        <div class="mod-item" id="mod-transmission">
+                            <i class="fas fa-cog"></i>
+                            <span>Trasmissione: </span>
+                            <span class="mod-value">Stock</span>
+                        </div>
+                        <div class="mod-item" id="mod-suspension">
+                            <i class="fas fa-car-side"></i>
+                            <span>Sospensioni: </span>
+                            <span class="mod-value">Stock</span>
+                        </div>
+                        <div class="mod-item" id="mod-armor">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Armatura: </span>
+                            <span class="mod-value">Stock</span>
+                        </div>
+                        <div class="mod-item" id="mod-turbo">
+                            <i class="fas fa-wind"></i>
+                            <span>Turbo: </span>
+                            <span class="mod-value">No</span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            
+            <!-- Navigazione tra i veicoli -->
+            <div class="navigation">
+                <button id="prev-vehicle" class="nav-button">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-vehicle" class="nav-button">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
