@@ -27,18 +27,7 @@ Importa la tabella SQL nel tuo database
 Aggiungi ensure Flash_garage al tuo server.cfg
 Configura il file config.lua secondo le tue esigenze
 Struttura del Database
-La risorsa utilizza la tabella owned_vehicles con i seguenti campi:
-
-id: Identificatore unico auto-incrementale
-owner: Identificatore del proprietario
-plate: Targa del veicolo
-vehicle: Proprietà del veicolo in formato JSON
-type: Tipo di veicolo
-job: Lavoro associato al veicolo
-stored: Indica se il veicolo è immagazzinato
-garage: Nome del garage in cui è parcheggiato
-pound: Indica se il veicolo è sequestrato
-vehiclename: Nome del veicolo
+La risorsa utilizza la tabella owned_vehicles
 
 Il file config.lua permette di personalizzare:
 
@@ -56,7 +45,7 @@ Sviluppato da Flash per la community di FiveM.
 ![Menu principale del garage](https://i.ibb.co/1tRx93gj/Screenshot-26.png)
 
 
-Supporto
+
 Per supporto o segnalazione di bug, apri una issue su GitHub.
 
 Tags
